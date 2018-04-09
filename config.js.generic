@@ -1,0 +1,12 @@
+//keys for telegram, verion and code name
+exports.telegram = {
+  "token": "xxx"
+}
+
+exports.ver ={
+  "version" : "0.1.2",
+  "codename": "Tyrant Troll"
+}
+
+//remote calendar
+exports.cal = "https://xx.com/calendar.ics";

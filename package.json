@@ -1,0 +1,17 @@
+{
+  "name": "telegram_bot_base",
+  "version": "0.1.0",
+  "description": "bot telegram basico",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "node main.js > log 2>error",
+    "start": "node main.js"
+  },
+  "author": "juan luis gutierrez <virtual.yo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ical": "^0.5.0",
+    "telegram-node-bot": "^4.0.5"
+  }
+}
