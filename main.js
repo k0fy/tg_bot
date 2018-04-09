@@ -17,7 +17,7 @@ const tg = new Telegram.Telegram(TELEGRAMAPI, {workers: 1});
 
 
 //mios
-const fortune = require('./fortunes.js');
+//const fortune = require('./fortunes.js');
 var calendario = require('./calendario.js');
 
 
@@ -30,15 +30,12 @@ process.on('unhandledRejection', function (error, p) {
 	console.log("\x1b[31m","Error: ", error.message, "\x1b[0m");
 });
 
-
-//calendario
-/**
- * 
+/***
+ * calendario
  */
 class CalController extends TelegramBaseController {
   calHandler($){
     var eventsForDays=10;
-    //$.sendMessage("Geek Events:");
 
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -63,7 +60,6 @@ class CalController extends TelegramBaseController {
             if((event.length-1) > parseInt(ev)){ nl = "\n"; }
             else{ nl=""; }
             
-          //if(event[ev].class == "PUBLIC" ){
             if(event[ev].summary != event[ev].description){
               info = info + " - " + event[ev].summary + "\n" + event[ev].description + nl;
             }
@@ -74,30 +70,10 @@ class CalController extends TelegramBaseController {
         }
       }
     });
-    //$.sendPhoto({ path: './img/cafe.png'});
   }
   
   get routes() {
     return { 'calCommand': 'calHandler'}
-  }
-}
-
-//fortunes
-/**
- * 
- */
-class PingController extends TelegramBaseController {
-  /**
-   * @param {Scope} $
-   */
-  fortuneHandler($) {
-    var f = fortune.getFortune('fortunes/misc.json');
-    $.sendMessage(f);
-//    $.sendMessage('pong');
-  }
-
-  get routes() {
-    return { 'fortuneCommand': 'fortuneHandler'}
   }
 }
 
@@ -107,27 +83,25 @@ class PingController extends TelegramBaseController {
  * */
 class HelpController extends TelegramBaseController {
   helpHandler($){
-    
-    var msg = "/fortune - Get a fortune cookie\n" + 
-      "/date - Get the date of events and geek dates and events\n" + 
-      "/help - This help";
+    var msg = "/date - Get the events of the next 10 days\n" +
+      "/help - This help\n" +
+      "/info - About the bot..";
     $.sendMessage(msg);
   }
+
   get routes() {
     return { 'helpCommand': 'helpHandler'}
   }
 }
 
-//informacion
 /***
- * 
+ * informacion
  * */
 class InfoController extends TelegramBaseController {
   infoHandler($){
     var msg = "Ver: " + BOTVER + " - codename: " + BOTCODENAME + "\n" + 
-              "This bot is a basic exercice\n" + 
-              "..and a experiment.\n" + 
-              "You can send comments and suggestions to @k0fy_chaos";
+              "This bot sends calendar events in the next 10 days";
+
     $.sendMessage(msg);
   }
   get routes() {
@@ -139,5 +113,4 @@ class InfoController extends TelegramBaseController {
 tg.router
   .when(new TextCommand('/help', 'helpCommand'), new HelpController())
   .when(new TextCommand('/date', 'calCommand'), new CalController())
-  .when( new TextCommand('/fortune', 'fortuneCommand'), new PingController() )
   .when( new TextCommand('/info', 'infoCommand'), new InfoController() )
