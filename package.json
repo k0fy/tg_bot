@@ -9,7 +9,7 @@
     "start": "node main.js"
   },
   "author": "juan luis gutierrez <virtual.yo@gmail.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "ical": "^0.5.0",
     "telegram-node-bot": "^4.0.5"

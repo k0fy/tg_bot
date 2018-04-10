@@ -29,21 +29,10 @@ function getMonthIndex(m){
 
 
 /***
-
 *  todoOnMonth()
 *  todoOnMonth(1)
 *  todoOnMonth("jan")
 **/
-/*
-+---------+--------------------+
-| dia     | summary            |
-| mes     | description        |
-| año     |                    |
-+---------+--------------------+
-|%completo categories duration |
-| location                     |
-+------------------------------+
-*/
 exports.todosOnMonth = function(data, evento){
   if(typeof(evento) == "string"){
     evento = getMonthIndex(evento);
